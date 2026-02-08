@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int low = 0, high = nums.size() - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            // make mid even
+            if (mid % 2 == 1)
+                mid--;
+
+            if (nums[mid] == nums[mid + 1]) {
+                // single element is on right side
+                low = mid + 2;
+            } else {
+                // single element is on left side (or mid)
+                high = mid;
+            }
+        }
+
+        return nums[low];
+    }
+};
